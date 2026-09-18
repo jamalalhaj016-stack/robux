@@ -12,12 +12,18 @@ varying vec2 lmcoord;
 varying vec4 vcolor;
 varying vec3 wnormal;
 varying vec3 playerPos;
+varying float vBlockId;
 
 void main() {
     texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
     lmcoord  = remapLightmap((gl_TextureMatrix[1] * gl_MultiTexCoord1).xy);
     vcolor   = gl_Color;
     wnormal  = normalize(mat3(gbufferModelViewInverse) * (gl_NormalMatrix * gl_Normal));
+#ifdef PROGRAM_TERRAIN
+    vBlockId = mc_Entity.x;
+#else
+    vBlockId = -1.0;
+#endif
 
     vec4 viewPos = gl_ModelViewMatrix * gl_Vertex;
     playerPos = (gbufferModelViewInverse * viewPos).xyz;
