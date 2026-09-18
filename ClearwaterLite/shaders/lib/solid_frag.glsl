@@ -25,9 +25,9 @@ vec3 getOreGlow(float blockId, vec3 albedoColor) {
     // Only glow bright pixels (the ore gems/bits, not the dark stone)
     if (brightness < 0.4) return vec3(0.0);
 
-    // Glow color matches the ore's natural color
-    // Gold, emerald, lapis, redstone, copper all have their own hues
-    return albedoColor * brightness * 0.8;
+    // Emissive glow - bright enough to show through shadows
+    // Glow color matches ore's natural color
+    return albedoColor * brightness * 1.5;
 }
 
 void main() {
