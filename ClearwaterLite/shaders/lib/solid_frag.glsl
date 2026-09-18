@@ -15,9 +15,12 @@ varying vec3 wnormal;
 varying vec3 playerPos;
 varying float vBlockId;
 
-vec3 getOreGlow(float blockId) {
-    // Diamond - cyan glow
-    if (blockId == 50.0) return vec3(0.3, 0.8, 1.0) * 1.5;
+vec3 getOreGlow(float blockId, vec3 albedoColor) {
+    // Diamond - cyan glow only on bright parts of texture (the diamonds)
+    if (blockId == 50.0) {
+        float brightness = dot(albedoColor, vec3(0.3, 0.6, 0.1));
+        return vec3(0.3, 0.8, 1.0) * brightness * 0.6;
+    }
     return vec3(0.0);
 }
 
@@ -35,9 +38,9 @@ void main() {
     float dither = bayer8(gl_FragCoord.xy);
     vec3 color = shadeSurface(albedo.rgb, normalize(wnormal), lmcoord, playerPos, dither);
 
-    // Add ore glow
-    vec3 oreGlow = getOreGlow(vBlockId);
-    color += oreGlow * 0.8;
+    // Add ore glow only where texture is bright (diamond bits, not stone)
+    vec3 oreGlow = getOreGlow(vBlockId, albedo.rgb);
+    color += oreGlow;
 
     gl_FragData[0] = vec4(color, albedo.a);
 }
