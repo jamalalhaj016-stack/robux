@@ -1,10 +1,15 @@
 #include "/lib/common.glsl"
 #include "/lib/sky.glsl"
+#include "/lib/animation.glsl"
 
 #ifdef PROGRAM_TERRAIN
 #include "/lib/waving.glsl"
 attribute vec4 mc_Entity;
 attribute vec4 mc_midTexCoord;
+#endif
+
+#ifdef PROGRAM_ENTITIES
+attribute vec4 mc_Entity;
 #endif
 
 varying vec2 texcoord;
@@ -35,6 +40,15 @@ void main() {
     playerPos += getWaveOffset(playerPos + cameraPosition, mc_Entity.x, isTop, lmcoord.y);
     gl_Position = gl_ProjectionMatrix * (gbufferModelView * vec4(playerPos, 1.0));
 #else
+#ifdef PROGRAM_ENTITIES
+    // Apply mob/player animations
+    vec3 animOffset = getMobSpecificAnimation(gl_Vertex.xyz, gl_Color, frameTimeCounter);
+    vec3 animRotated = getRotationAnimation(gl_Vertex.xyz, frameTimeCounter);
+    vec3 animatedPos = gl_Vertex.xyz + animOffset + (animRotated - gl_Vertex.xyz) * 0.3;
+    vec4 animViewPos = gl_ModelViewMatrix * vec4(animatedPos, 1.0);
+    gl_Position = gl_ProjectionMatrix * animViewPos;
+#else
     gl_Position = gl_ProjectionMatrix * viewPos;
+#endif
 #endif
 }
