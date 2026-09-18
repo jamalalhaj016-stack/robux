@@ -16,12 +16,18 @@ varying vec3 playerPos;
 varying float vBlockId;
 
 vec3 getOreGlow(float blockId, vec3 albedoColor) {
-    // Diamond - cyan glow only on bright parts of texture (the diamonds)
-    if (blockId == 50.0) {
-        float brightness = dot(albedoColor, vec3(0.3, 0.6, 0.1));
-        return vec3(0.3, 0.8, 1.0) * brightness * 0.6;
-    }
-    return vec3(0.0);
+    // Only glow if this is an ore block (ID 50)
+    if (blockId != 50.0) return vec3(0.0);
+
+    // Calculate brightness of this pixel (ore bits are brighter)
+    float brightness = dot(albedoColor, vec3(0.3, 0.6, 0.1));
+
+    // Only glow bright pixels (the ore gems/bits, not the dark stone)
+    if (brightness < 0.4) return vec3(0.0);
+
+    // Glow color matches the ore's natural color
+    // Gold, emerald, lapis, redstone, copper all have their own hues
+    return albedoColor * brightness * 0.8;
 }
 
 void main() {
