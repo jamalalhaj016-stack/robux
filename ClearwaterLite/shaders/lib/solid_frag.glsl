@@ -19,15 +19,14 @@ vec3 getOreGlow(float blockId, vec3 albedoColor) {
     // Only glow if this is an ore block (ID 50)
     if (blockId != 50.0) return vec3(0.0);
 
-    // Calculate brightness of this pixel (ore bits are brighter)
-    float brightness = dot(albedoColor, vec3(0.3, 0.6, 0.1));
+    // Use max channel as brightness for ore gems
+    float brightness = max(max(albedoColor.r, albedoColor.g), albedoColor.b);
 
-    // Only glow bright pixels (the ore gems/bits, not the dark stone)
-    if (brightness < 0.4) return vec3(0.0);
+    // Lower threshold to catch more ore pixels
+    if (brightness < 0.25) return vec3(0.0);
 
-    // Emissive glow - bright enough to show through shadows
-    // Glow color matches ore's natural color
-    return albedoColor * brightness * 1.5;
+    // Emissive glow - strong and independent of shadows
+    return albedoColor * brightness * 2.0;
 }
 
 void main() {
