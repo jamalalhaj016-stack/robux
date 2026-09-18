@@ -1,0 +1,132 @@
+# Clearwater Lite - option names shown in the shader options menu
+
+screen.PERFORMANCE=Shadows & Performance
+screen.WATER=Water
+screen.LIGHTING=Lighting & Wind
+screen.SKY=Sky & Fog
+screen.POST=Colour & Bloom
+
+option.SHADOWS=Shadows
+option.SHADOWS.comment=Sun and moon shadow mapping. The single most expensive feature in the pack - turn it off first if you are short on frames.
+
+option.shadowMapResolution=Shadow Resolution
+option.shadowMapResolution.comment=Pixels per side of the shadow map. Doubling this quadruples its memory and fill cost. 1024 is a good balance on older cards.
+
+option.shadowDistance=Shadow Distance
+option.shadowDistance.comment=How far from you shadows are drawn, in blocks. Beyond this they fade out smoothly. Lower is much cheaper.
+
+option.SHADOW_SAMPLES=Shadow Filter
+option.SHADOW_SAMPLES.comment=Taps used to soften shadow edges. 1 is hard edged but nearly free; 4 looks soft for very little cost.
+
+option.SHADOW_SOFTNESS=Shadow Softness
+option.SHADOW_SOFTNESS.comment=How wide the soft edge spreads. Costs nothing extra, but large values with few samples look grainy.
+
+option.COLORED_SHADOWS=Coloured Shadows
+option.COLORED_SHADOWS.comment=Stained glass and water tint the light passing through them. Doubles the number of shadow lookups.
+
+option.sunPathRotation=Sun Path Tilt
+option.sunPathRotation.comment=Tilts the sun's arc so it does not pass straight overhead at noon. Angled light gives you longer, more interesting shadows.
+
+option.ambientOcclusionLevel=Vanilla AO
+option.ambientOcclusionLevel.comment=Strength of Minecraft's own corner shading. Free, and it does a lot of the contact shading work here.
+
+option.WATER_WAVES=Water Waves
+option.WATER_WAVES.comment=Animated wave surface and ripple normals. Turning this off leaves water flat but still reflective.
+
+option.WATER_WAVE_HEIGHT=Wave Height
+option.WATER_WAVE_HEIGHT.comment=How far the water surface actually moves up and down.
+
+option.WATER_WAVE_SPEED=Wave Speed
+option.WATER_WAVE_SPEED.comment=How fast the waves travel.
+
+option.WATER_DETAIL=Wave Detail
+option.WATER_DETAIL.comment=Number of wave layers. Each one adds finer ripples and a little cost on water pixels only.
+
+option.WATER_NORMAL_STRENGTH=Ripple Strength
+option.WATER_NORMAL_STRENGTH.comment=How sharply the ripples bend the reflection. Free - this only changes the normal, not the geometry.
+
+option.WATER_SPECULAR=Sun Glint
+option.WATER_SPECULAR.comment=Sharp highlight where the sun or moon reflects off the waves.
+
+option.WATER_OPACITY=Water Opacity
+option.WATER_OPACITY.comment=How much of the bottom you can see when looking straight down. Grazing angles always turn reflective.
+
+option.WATER_ABSORPTION=Water Absorption
+option.WATER_ABSORPTION.comment=How quickly water swallows light with depth. Higher means deeper water goes blue and dark faster.
+
+option.SUN_INTENSITY=Sunlight
+option.SUN_INTENSITY.comment=Brightness of direct sun and moon light.
+
+option.AMBIENT_INTENSITY=Ambient Light
+option.AMBIENT_INTENSITY.comment=Brightness of the sky light filling in the shadows.
+
+option.MINIMUM_LIGHT=Minimum Light
+option.MINIMUM_LIGHT.comment=A small floor added everywhere so unlit caves are not pure black. Raise it if you cannot see to mine.
+
+option.BLOCKLIGHT_INTENSITY=Torch Light
+option.BLOCKLIGHT_INTENSITY.comment=Brightness of torches, lanterns and other block light.
+
+option.BLOCKLIGHT_TEMPERATURE=Torch Warmth
+option.BLOCKLIGHT_TEMPERATURE.comment=How orange block light is. 0 is near white, higher is firelight.
+
+option.HANDHELD_LIGHT=Handheld Light
+option.HANDHELD_LIGHT.comment=A torch in your hand lights the world around you.
+
+option.WAVING_PLANTS=Waving Plants
+option.WAVING_PLANTS.comment=Grass, crops and flowers bend in the wind. Vertex work only, very cheap.
+
+option.WAVING_LEAVES=Waving Leaves
+option.WAVING_LEAVES.comment=Leaf blocks and vines sway. Cheap, but it touches a lot of vertices in a forest.
+
+option.WAVE_SPEED=Wind Speed
+option.WAVE_SPEED.comment=How fast plants and leaves move.
+
+option.WAVE_STRENGTH=Wind Strength
+option.WAVE_STRENGTH.comment=How far plants and leaves move.
+
+option.SKY_BRIGHTNESS=Sky Brightness
+option.SKY_BRIGHTNESS.comment=Overall brightness of the sky, which also drives fog and water reflections.
+
+option.STARS_BRIGHTNESS=Stars
+option.STARS_BRIGHTNESS.comment=Brightness of the night sky stars.
+
+option.FOG=Distance Fog
+option.FOG.comment=Fades far terrain into the sky, and thickens during rain.
+
+option.FOG_DENSITY=Fog Density
+option.FOG_DENSITY.comment=How strongly the fog builds up.
+
+option.FOG_START=Fog Start
+option.FOG_START.comment=How far out the fog begins, as a fraction of your render distance.
+
+option.BLOOM=Bloom
+option.BLOOM.comment=Soft glow around bright things like the sun, lava and glowstone. Two fullscreen blur passes.
+
+option.BLOOM_STRENGTH=Bloom Strength
+option.BLOOM_STRENGTH.comment=How much glow is added back over the scene.
+
+option.BLOOM_RADIUS=Bloom Radius
+option.BLOOM_RADIUS.comment=How far the glow spreads. Costs nothing extra.
+
+option.BLOOM_THRESHOLD=Bloom Threshold
+option.BLOOM_THRESHOLD.comment=How bright something must be before it glows. Lower makes more of the scene bloom.
+
+option.EXPOSURE=Exposure
+option.EXPOSURE.comment=Overall brightness of the final image. Raise this first if the pack looks too dark on your monitor.
+
+option.SATURATION=Saturation
+option.SATURATION.comment=Colour intensity.
+
+option.CONTRAST=Contrast
+option.CONTRAST.comment=Separation between darks and brights.
+
+option.VIGNETTE=Vignette
+option.VIGNETTE.comment=Gentle darkening towards the corners of the screen.
+
+option.VIGNETTE_STRENGTH=Vignette Strength
+option.VIGNETTE_STRENGTH.comment=How dark the corners get.
+
+profile.POTATO=Potato
+profile.LOW=Low
+profile.MEDIUM=Medium
+profile.HIGH=High

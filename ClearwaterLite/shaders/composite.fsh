@@ -26,11 +26,14 @@ void main() {
     float dist = length(viewPos);
     bool  isSky = d0 >= 1.0;
 
+    // Written by gbuffers_water only. If the loader honours our blend override
+    // this is exactly 1.0; if it does not, blending scales it by the surface
+    // alpha, so the test below is deliberately loose.
     float waterFlag = texture2D(colortex1, texcoord).r;
 
     // How much water the light had to travel through to reach the camera.
     // depthtex0 is the water surface, depthtex1 the sea floor behind it.
-    if (isEyeInWater == 0 && waterFlag > 0.5 && d1 > d0) {
+    if (isEyeInWater == 0 && waterFlag > 0.04 && d1 > d0) {
         float thickness = max(linearizeDepth(d1, near, far) - linearizeDepth(d0, near, far), 0.0);
         vec3 absorb = exp(-waterExtinction() * thickness);
         color = color * absorb + waterScatterColor() * (1.0 - absorb);
