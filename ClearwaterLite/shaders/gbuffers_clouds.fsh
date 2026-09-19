@@ -17,7 +17,7 @@ void main() {
 
     // Complementary-style cloud rendering
     vec3 dir = normalize(playerPos);
-    vec3 sunDir = worldSunLightDir();
+    vec3 sunDir = worldShadowLightDir();
 
     // Rich cloud lighting - bright and vibrant
     vec3 sunLight = sunlightColor() * 1.3;
