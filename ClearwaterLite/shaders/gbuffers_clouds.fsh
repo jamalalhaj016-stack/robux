@@ -15,31 +15,27 @@ void main() {
 
     c.rgb = toLinear(c.rgb);
 
-    // Complementary-style cloud rendering
-    vec3 dir = normalize(playerPos);
-    vec3 sunDir = worldShadowLightDir();
+    // Complementary shader-style vibrant clouds
+    vec3 sunColor = sunlightColor();
+    vec3 skyColor = skyAmbientColor();
 
-    // Rich cloud lighting - bright and vibrant
-    vec3 sunLight = sunlightColor() * 1.3;
-    vec3 skyLight = skyAmbientColor() * 2.8;
-    vec3 rimLight = sunlightColor() * 0.5 * max(dot(dir, -sunDir), 0.0);
+    // Rich, vibrant lighting
+    vec3 light = sunColor * 1.1 + skyColor * 2.4;
 
-    // Cloud density affects lighting (thicker = darker)
-    float cloudDensity = c.a;
-    vec3 baseLighting = mix(skyLight * 0.5, sunLight, cloudDensity * 0.6);
+    // Enhance cloud saturation and brightness
+    c.rgb = c.rgb * light;
+    c.rgb = c.rgb * 1.3; // Extra brightness
 
-    // Apply rich, saturated lighting
-    c.rgb = c.rgb * (baseLighting + rimLight + skyLight * 0.4);
-
-    // Beautiful distance fade
+    // Smooth distance fade
     float distance = length(playerPos.xz);
-    float fadeDistance = max(far * 1.3, 90.0);
-    float fade = smoothstep(fadeDistance * 0.5, fadeDistance, distance);
+    float fadeStart = max(far * 0.7, 60.0);
+    float fadeEnd = max(far * 1.4, 120.0);
+    float fade = smoothstep(fadeStart, fadeEnd, distance);
 
-    // Blend smoothly with sky
-    vec3 skyColor = getSkyColor(dir);
-    c.rgb = mix(c.rgb, skyColor, fade);
-    c.a = mix(c.a, 0.0, fade);
+    // Blend with sky
+    vec3 dir = normalize(playerPos);
+    vec3 skyGradient = getSkyColor(dir);
+    c.rgb = mix(c.rgb, skyGradient, fade * fade);
 
     gl_FragData[0] = c;
 }
