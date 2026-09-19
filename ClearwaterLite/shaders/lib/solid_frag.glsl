@@ -17,12 +17,9 @@ varying float vBlockId;
 
 vec3 getOreGlow(float blockId, vec3 albedoColor) {
     if (blockId != 50.0) return vec3(0.0);
-
     float brightness = max(max(albedoColor.r, albedoColor.g), albedoColor.b);
-    if (brightness < 0.2) return vec3(0.0);
-
-    // Simple smooth glow using texture color
-    return albedoColor * brightness * 2.2;
+    if (brightness < 0.15) return vec3(0.0);
+    return albedoColor * brightness * 6.0;
 }
 
 void main() {
